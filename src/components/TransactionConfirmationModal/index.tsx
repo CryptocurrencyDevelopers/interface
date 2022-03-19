@@ -330,7 +330,7 @@ export default function TransactionConfirmationModal({
 }: ConfirmationModalProps) {
   const { chainId } = useActiveWeb3React()
 
-  const isL2 = Boolean(chainId && L2_CHAIN_IDS.includes(chainId))
+  const isL2 = false
 
   if (!chainId) return null
 

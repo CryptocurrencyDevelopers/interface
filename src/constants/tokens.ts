@@ -24,6 +24,15 @@ export const DAI_ARBITRUM_ONE = new Token(
   'WRBA',
   'Wrapped Roburna'
 )
+export const RBM: { [chainId: number]: Token } = {
+  [SupportedChainId.TETHERMOON]: new Token(
+    SupportedChainId.TETHERMOON,
+    '0x5d94f3Fe253487016522560a19b28281a5F08Ec8',
+    18,
+    'WRBA',
+    'Wrapped Roburna'
+  ),
+}
 export const DAI_OPTIMISM = new Token(
   SupportedChainId.TETHERMOON,
   '0x5d94f3Fe253487016522560a19b28281a5F08Ec8',

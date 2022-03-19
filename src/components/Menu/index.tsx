@@ -218,8 +218,8 @@ export default function Menu() {
   useOnClickOutside(node, open ? toggleMenu : undefined)
   const togglePrivacyPolicy = useToggleModal(ApplicationModal.PRIVACY_POLICY)
   const openClaimModal = useToggleModal(ApplicationModal.ADDRESS_CLAIM)
-  const showUNIClaimOption = Boolean(!!account && !!chainId && !L2_CHAIN_IDS.includes(chainId))
-  const { infoLink } = CHAIN_INFO[chainId ? chainId : SupportedChainId.MAINNET]
+  const showUNIClaimOption = Boolean(!!account && !!chainId)
+  const { infoLink } = CHAIN_INFO[chainId ? chainId : SupportedChainId.TETHERMOON]
 
   const [darkMode, toggleDarkMode] = useDarkModeManager()
 

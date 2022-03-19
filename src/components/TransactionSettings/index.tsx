@@ -154,7 +154,7 @@ export default function TransactionSettings({ placeholderSlippage }: Transaction
     }
   }
 
-  const showCustomDeadlineRow = Boolean(chainId && !L2_CHAIN_IDS.includes(chainId))
+  const showCustomDeadlineRow = false
 
   return (
     <AutoColumn gap="md">
