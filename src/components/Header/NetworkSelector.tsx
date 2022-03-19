@@ -138,28 +138,10 @@ const StyledChevronDown = styled(ChevronDown)`
   width: 12px;
 `
 const BridgeText = ({ chainId }: { chainId: SupportedL2ChainId }) => {
-  switch (chainId) {
-    case SupportedChainId.ARBITRUM_ONE:
-    case SupportedChainId.ARBITRUM_RINKEBY:
-      return <Trans>Arbitrum Bridge</Trans>
-    case SupportedChainId.OPTIMISM:
-    case SupportedChainId.OPTIMISTIC_KOVAN:
-      return <Trans>Optimism Gateway</Trans>
-    default:
-      return <Trans>Bridge</Trans>
-  }
+  return <Trans>Bridge</Trans>
 }
 const ExplorerText = ({ chainId }: { chainId: SupportedL2ChainId }) => {
-  switch (chainId) {
-    case SupportedChainId.ARBITRUM_ONE:
-    case SupportedChainId.ARBITRUM_RINKEBY:
-      return <Trans>Arbiscan</Trans>
-    case SupportedChainId.OPTIMISM:
-    case SupportedChainId.OPTIMISTIC_KOVAN:
-      return <Trans>Optimistic Etherscan</Trans>
-    default:
-      return <Trans>Explorer</Trans>
-  }
+  return <Trans>Explorer</Trans>
 }
 
 export default function NetworkSelector() {
@@ -171,10 +153,8 @@ export default function NetworkSelector() {
   const implements3085 = useAppSelector((state) => state.application.implements3085)
 
   const info = chainId ? CHAIN_INFO[chainId] : undefined
-
-  const isOnL2 = chainId ? L2_CHAIN_IDS.includes(chainId) : false
-  const showSelector = Boolean(implements3085 || isOnL2)
-  const mainnetInfo = CHAIN_INFO[SupportedChainId.MAINNET]
+  const showSelector = Boolean(implements3085)
+  const mainnetInfo = CHAIN_INFO[SupportedChainId.TETHERMOON]
 
   const conditionalToggle = useCallback(() => {
     if (showSelector) {
@@ -195,9 +175,7 @@ export default function NetworkSelector() {
       toggle()
     }
     const active = chainId === targetChain
-    const hasExtendedInfo = L2_CHAIN_IDS.includes(targetChain)
-    const isOptimism = targetChain === SupportedChainId.OPTIMISM
-    const rowText = `${CHAIN_INFO[targetChain].label}${isOptimism ? ' (Optimism)' : ''}`
+    const rowText = `${CHAIN_INFO[targetChain].label}${''}`
     const RowContent = () => (
       <FlyoutRow onClick={handleRowClick} active={active}>
         <Logo src={CHAIN_INFO[targetChain].logoUrl} />
@@ -205,25 +183,7 @@ export default function NetworkSelector() {
         {chainId === targetChain && <FlyoutRowActiveIndicator />}
       </FlyoutRow>
     )
-    const helpCenterLink = isOptimism ? OPTIMISM_HELP_CENTER_LINK : ARBITRUM_HELP_CENTER_LINK
-    if (active && hasExtendedInfo) {
-      return (
-        <ActiveRowWrapper>
-          <RowContent />
-          <ActiveRowLinkList>
-            <ExternalLink href={CHAIN_INFO[targetChain as SupportedL2ChainId].bridge}>
-              <BridgeText chainId={chainId} /> <LinkOutCircle />
-            </ExternalLink>
-            <ExternalLink href={CHAIN_INFO[targetChain].explorer}>
-              <ExplorerText chainId={chainId} /> <LinkOutCircle />
-            </ExternalLink>
-            <ExternalLink href={helpCenterLink}>
-              <Trans>Help Center</Trans> <LinkOutCircle />
-            </ExternalLink>
-          </ActiveRowLinkList>
-        </ActiveRowWrapper>
-      )
-    }
+
     return <RowContent />
   }
 
@@ -239,9 +199,7 @@ export default function NetworkSelector() {
           <FlyoutHeader>
             <Trans>Select a network</Trans>
           </FlyoutHeader>
-          <Row targetChain={SupportedChainId.MAINNET} />
-          <Row targetChain={SupportedChainId.OPTIMISM} />
-          <Row targetChain={SupportedChainId.ARBITRUM_ONE} />
+          <Row targetChain={SupportedChainId.TETHERMOON} />
         </FlyoutMenu>
       )}
     </SelectorWrapper>

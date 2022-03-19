@@ -4,33 +4,30 @@ import React, { useMemo } from 'react'
 import styled from 'styled-components/macro'
 
 import EthereumLogo from '../../assets/images/ethereum-logo.png'
+import TethermoonLogo from '../../assets/images/rbm-logo.png'
 import useHttpLocations from '../../hooks/useHttpLocations'
 import { WrappedTokenInfo } from '../../state/lists/wrappedTokenInfo'
 import Logo from '../Logo'
 
-type Network = 'ethereum' | 'arbitrum' | 'optimism'
+type Network = 'Tethermoon'
 
 function chainIdToNetworkName(networkId: SupportedChainId): Network {
   switch (networkId) {
-    case SupportedChainId.MAINNET:
-      return 'ethereum'
-    case SupportedChainId.ARBITRUM_ONE:
-      return 'arbitrum'
-    case SupportedChainId.OPTIMISM:
-      return 'optimism'
+    case SupportedChainId.TETHERMOON:
+      return 'Tethermoon'
     default:
-      return 'ethereum'
+      return 'Tethermoon'
   }
 }
 
 export const getTokenLogoURL = (
   address: string,
-  chainId: SupportedChainId = SupportedChainId.MAINNET
+  chainId: SupportedChainId = SupportedChainId.TETHERMOON
 ): string | void => {
   const networkName = chainIdToNetworkName(chainId)
-  const networksWithUrls = [SupportedChainId.ARBITRUM_ONE, SupportedChainId.MAINNET, SupportedChainId.OPTIMISM]
+  const networksWithUrls = [SupportedChainId.TETHERMOON]
   if (networksWithUrls.includes(chainId)) {
-    return `https://raw.githubusercontent.com/Uniswap/assets/master/blockchains/${networkName}/assets/${address}/logo.png`
+    return `https://localhost:3001/assets/images/rbm-logo.svg `
   }
 }
 

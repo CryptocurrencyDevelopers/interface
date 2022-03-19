@@ -7,6 +7,7 @@ import styled from 'styled-components/macro'
 
 import tokenLogo from '../../assets/images/token-logo.png'
 import { UNI } from '../../constants/tokens'
+import { RBM } from '../../constants/tokens'
 import { useMerkleDistributorContract } from '../../hooks/useContract'
 import useCurrentBlockTimestamp from '../../hooks/useCurrentBlockTimestamp'
 import { useTotalSupply } from '../../hooks/useTotalSupply'
@@ -45,7 +46,7 @@ const StyledClose = styled(X)`
  */
 export default function UniBalanceContent({ setShowUniBalanceModal }: { setShowUniBalanceModal: any }) {
   const { account, chainId } = useActiveWeb3React()
-  const uni = chainId ? UNI[chainId] : undefined
+  const uni = chainId ? RBM[chainId] : undefined
 
   const total = useAggregateUniBalance()
   const uniBalance: CurrencyAmount<Token> | undefined = useTokenBalance(account ?? undefined, uni)
@@ -57,11 +58,11 @@ export default function UniBalanceContent({ setShowUniBalanceModal }: { setShowU
   const unclaimedUni = useTokenBalance(useMerkleDistributorContract()?.address, uni)
   const circulation: CurrencyAmount<Token> | undefined = useMemo(
     () =>
-      blockTimestamp && uni && chainId === 1 ? computeUniCirculation(uni, blockTimestamp, unclaimedUni) : totalSupply,
+      blockTimestamp && uni && chainId === 159 ? computeUniCirculation(uni, blockTimestamp, unclaimedUni) : totalSupply,
     [blockTimestamp, chainId, totalSupply, unclaimedUni, uni]
   )
 
-  const { infoLink } = CHAIN_INFO[chainId ? chainId : SupportedChainId.MAINNET]
+  const { infoLink } = CHAIN_INFO[chainId ? chainId : SupportedChainId.TETHERMOON]
 
   return (
     <ContentWrapper gap="lg">

@@ -1,5 +1,5 @@
 import { Trans } from '@lingui/macro'
-import { L2_CHAIN_IDS, SupportedChainId } from 'constants/chains'
+import { SupportedChainId } from 'constants/chains'
 import { useActiveWeb3React } from 'hooks/web3'
 import { AlertOctagon } from 'react-feather'
 import styled from 'styled-components/macro'
@@ -30,36 +30,19 @@ const ReadMoreLink = styled(ExternalLink)`
 
 export default function DowntimeWarning() {
   const { chainId } = useActiveWeb3React()
-  if (!chainId || !L2_CHAIN_IDS.includes(chainId)) {
+  if (!chainId) {
     return null
   }
 
   const Content = () => {
     switch (chainId) {
-      case SupportedChainId.OPTIMISM:
-      case SupportedChainId.OPTIMISTIC_KOVAN:
+      case SupportedChainId.TETHERMOON:
         return (
           <div>
             <Trans>
-              Optimistic Ethereum is in Beta and may experience downtime. Optimism expects planned downtime to upgrade
-              the network in the near future. During downtime, your position will not earn fees and you will be unable
-              to remove liquidity.{' '}
-              <ReadMoreLink href="https://help.uniswap.org/en/articles/5406082-what-happens-if-the-optimistic-ethereum-network-experiences-downtime">
-                Read more.
-              </ReadMoreLink>
-            </Trans>
-          </div>
-        )
-      case SupportedChainId.ARBITRUM_ONE:
-      case SupportedChainId.ARBITRUM_RINKEBY:
-        return (
-          <div>
-            <Trans>
-              Arbitrum is in Beta and may experience downtime. During downtime, your position will not earn fees and you
-              will be unable to remove liquidity.{' '}
-              <ReadMoreLink href="https://help.uniswap.org/en/articles/5576122-arbitrum-network-downtime">
-                Read more.
-              </ReadMoreLink>
+              TETHERMOON is in Beta testnet and may experience downtime or changes without notice. Do not execute trades
+              with real ETH. During downtime, your position will not earn fees and you will be unable to remove
+              liquidity. <ReadMoreLink href="https://t.me/roburnaannouncements">Read more.</ReadMoreLink>
             </Trans>
           </div>
         )
